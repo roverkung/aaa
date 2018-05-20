@@ -14,7 +14,7 @@
     <font size=12 color=red>Hello , <?php echo $userid ?></font>
 
     <form  method="POST" id="form" action="u2freg.php">
-    <button name="startRegister" type="submit" >Register</button>
+    <button name="startRegister" type="submit" >Register U2F KEY</button>
     <button type="button" onclick="location.href='login2.php'">HOME
     <input type="hidden" name="user" ID="user" value='<?php echo $userid?>'>
     <INPUT TYPE="hidden" NAME="pass" ID="pass" value='<?php echo $pas?>'>

@@ -15,9 +15,9 @@ Password: <INPUT TYPE="text" NAME="pass" ID="pass"><BR>
 
 
 <p>
-<INPUT TYPE="submit" value="REGISTER ID & U2F" onclick="document.getElementById('btnid').value='1';">
+<INPUT TYPE="submit" value="Register ID & U2F" onclick="document.getElementById('btnid').value='1';">
 
-<INPUT TYPE="submit" value="LOGIN WITH U2F" onclick="document.getElementById('btnid').value='2';">
+<INPUT TYPE="submit" value="Login With U2F" onclick="document.getElementById('btnid').value='2';">
 
 </button>
 </FORM>
