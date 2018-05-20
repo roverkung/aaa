@@ -29,7 +29,7 @@
 
             var regobj = JSON.parse(reg);
             var data = null;
-            alert("3--" + reg);
+            //alert("3--" + reg);
 
             if(data == null) {
                 data = [regobj];
@@ -56,7 +56,7 @@
                 $ret[] = json_encode($d);
             }
              //echo "alert('001');\n";
-            echo "alert(5--'".$decoded ."');\n";
+            //echo "alert(5--'".$decoded ."');\n";
             return $ret;
         }
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -75,11 +75,11 @@
 	       }
 	    }
 
-            echo "alert('444');\n";
+            //echo "alert('444');\n";
 
             if(isset($_POST['startRegister'])) {
-                echo "alert('002');\n";
-                echo "alert('regstration= ".$keyhand."');\n";
+                //echo "alert('002');\n";
+                //echo "alert('regstration= ".$keyhand."');\n";
                 $regs = json_decode($keyhand) ? : array();
                 //$regs = json_decode($_POST['registrations']) ? : array();
                 list($data, $reqs) = $u2f->getRegisterData($regs);
@@ -89,8 +89,8 @@
 
 
             setTimeout(function() {
-              alert("9--" + request);
-              alert("10--" + signs);
+              //alert("9--" + request);
+              //alert("10--" + signs);
               console.log("Register: ", request);
 
 	      u2f.register([request], signs, function(data) {
@@ -114,14 +114,14 @@
 
                 document.getElementById('challenge').value=JSON.stringify(request);
                 //document.getElementById('challenge').value=data;
-                alert('003');
+                //alert('003');
                 form.submit();
             });
         }, 1000);
         <?php
             } else if($_POST['doRegister']) {
                 try {
-                    echo "alert('004');\n";
+                    //echo "alert('004');\n";
                     $data = $u2f->doRegister(json_decode($_POST['request']), json_decode($_POST['doRegister']));
                     echo "var registration = '" . json_encode($data) . "';\n";
 
@@ -135,7 +135,7 @@
                     echo "alert('error:" . $e->getMessage() . "');\n";
                 }
             } else if(isset($_POST['startAuthenticate'])) {
-                echo "alert('005');\n";
+                //echo "alert('005');\n";
                 $regs = json_decode($_POST['registrations']);
                 $data = $u2f->getAuthenticateData($regs);
                 echo "var registrations = " . $_POST['registrations'] . ";\n";
@@ -160,8 +160,8 @@
         }, 1000);
         <?php
             } else if($_POST['doAuthenticate']) {
-                echo "alert('006');\n";
-               echo "alert('666==".$keyhand."');\n";
+               //echo "alert('006');\n";
+               //echo "alert('666==".$keyhand."');\n";
 
                 $reqs = json_decode($_POST['request']);
                 $regs = json_decode($_POST['registrations']);
@@ -219,8 +219,8 @@
         //var reg = document.getElementById('registrations').value;
         var autoclick = '<?php echo $regtype?>';
         var auth = document.getElementById('startAuthenticate');
-        alert("1==>reg= "+ reg);
-        alert("2==>reg= "+ auth);
+        //alert("1==>reg= "+ reg);
+        //alert("2==>reg= "+ auth);
 
         if(reg == null) {
           alert("reg empty");
