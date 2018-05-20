@@ -296,7 +296,9 @@ class U2F
         if($reg === null) {
             throw new Error('No matching registration found', ERR_NO_MATCHING_REGISTRATION );
         }
+
         $pemKey = $this->pubkey_to_pem($this->base64u_decode($reg->publicKey));
+
         if($pemKey === null) {
             throw new Error('Decoding of public key failed', ERR_PUBKEY_DECODE );
         }

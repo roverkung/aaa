@@ -6,6 +6,10 @@
     //$keyhand = $_POST['keyhandle'];
     $regtype = $_POST['regtype'];
     $challenge = $_POST['challenge'];
+    $authU2F=$_POST['authU2F'];
+    if ($authU2F != "") {
+      $keyhand= $_POST['registrations'];
+    };
 
     require_once('U2F.php');
     $scheme = isset($_SERVER['HTTPS']) ? "https://" : "http://";
@@ -36,7 +40,7 @@
             }
             Keystr=JSON.stringify(data);
             if (autoclick == "reg") {
-              alert("Registration Successful!");
+              alert("Registration Successful,Please login again!");
             } else {
               alert("Authentication successful!");
             };
@@ -56,25 +60,29 @@
                 $ret[] = json_encode($d);
             }
              //echo "alert('001');\n";
-            //echo "alert(5--'".$decoded ."');\n";
+            //echo "alert('5--".$decoded ."');\n";
             return $ret;
         }
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-	    include '/var/www/html/DB/linktest.php';
-	    $result=pg_query("select * from  devices where userid='$use'");
-	    if ($result) {
-    	       $keyhand ="";
-	       while($row=pg_fetch_array($result)) {
-	          if ($keyhand == "") {
-	             $keyhand = $row["bind_data"];
-	          } else {
-	             $keyhand = $keyhand .','.$row["bind_data"];
-	          }
-	          $keyhand = '['.$keyhand.']';
-	       }
-	    }
-
+           if ($authU2F != "" ) {
+             echo "alert('dddd ".$keyhand ."');\n";
+           }
+           else {
+              echo "alert('eeee ".$keyhand ."');\n"; 
+	      include '/var/www/html/DB/linktest.php';
+	      $result=pg_query("select * from  devices where userid='$use'");
+	      if ($result) {
+    	         $keyhand ="";
+	         while($row=pg_fetch_array($result)) {
+	            if ($keyhand == "") {
+	               $keyhand = $row["bind_data"];
+	            } else {
+	               $keyhand = $keyhand .','.$row["bind_data"];
+	            }
+	            $keyhand = '['.$keyhand.']';
+	         }
+	      }
+            }
             //echo "alert('444');\n";
 
             if(isset($_POST['startRegister'])) {
@@ -136,9 +144,14 @@
                 }
             } else if(isset($_POST['startAuthenticate'])) {
                 //echo "alert('005');\n";
-                $regs = json_decode($_POST['registrations']);
+                $authU2F ="Y";
+                //$regs = json_decode($_POST['registrations']);
+                $regs = json_decode($keyhand);
+
                 $data = $u2f->getAuthenticateData($regs);
-                echo "var registrations = " . $_POST['registrations'] . ";\n";
+                //echo "var registrations = " . $_POST['registrations'] . ";\n";
+                echo "var registrations = " . $keyhand . ";\n";
+
                 echo "var request = " . json_encode($data) . ";\n";
         ?>
         setTimeout(function() {
@@ -149,12 +162,14 @@
                 var form = document.getElementById('form');
                 var reg = document.getElementById('doAuthenticate');
                 var req = document.getElementById('request');
-                var regs = document.getElementById('registrations');
+                //var regs = document.getElementById('registrations');
                 console.log("Authenticate callback", data);
                 reg.value=JSON.stringify(data);
                 req.value=JSON.stringify(request);
-                regs.value=JSON.stringify(registrations);
-                document.getElementById('regtype').value="auth";
+                //regs.value=JSON.stringify(registrations);
+                $keyhand=JSON.stringify(registrations);
+                document.getElementById('authU2F').value = "Y";
+                //alert(registration);
                 form.submit();
             });
         }, 1000);
@@ -164,8 +179,8 @@
                //echo "alert('666==".$keyhand."');\n";
 
                 $reqs = json_decode($_POST['request']);
-                $regs = json_decode($_POST['registrations']);
-                //$regs = json_decode($keyhand);
+                //$regs = json_decode($_POST['registrations']);
+                $regs = json_decode($keyhand);
 
                 try {
                     $data = $u2f->doAuthenticate($reqs, $regs, json_decode($_POST['doAuthenticate']));
@@ -206,6 +221,9 @@
     <INPUT TYPE="hidden" NAME="keyhandle" ID="keyhandle">
     <p>
     <INPUT TYPE="hidden" NAME="regtype" ID="regtype" value='<?php echo $regtype?>'>
+    <p>
+    <INPUT TYPE="hidden" NAME="authU2F" ID="authU2F" value="">
+
 
 
 
@@ -217,7 +235,7 @@
     <script>
         var reg = '<?php echo $keyhand?>';
         //var reg = document.getElementById('registrations').value;
-        var autoclick = '<?php echo $regtype?>';
+        //var autoclick = '<?php echo $regtype?>';
         var auth = document.getElementById('startAuthenticate');
         //alert("1==>reg= "+ reg);
         //alert("2==>reg= "+ auth);
@@ -234,11 +252,12 @@
                 console.log("set the registrations to : ", reg);
                 var regged = document.getElementById('registered');
                 regged.innerHTML = decoded.length;
-                //if (autoclick=="Y")
-                //{
-                //  alert("dddddddddddd");
-                //  auth.click();
-                //}
+
+                /*if (autoclick == "auth")
+                {
+                  alert("dddddddddddd");
+                  auth.click();
+                }*/
             }
         }
     </script>

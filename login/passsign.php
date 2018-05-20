@@ -22,7 +22,7 @@
         <p>
         keyhandle: <input type="text" name="keyhandle" ID="keyhandle" value='<?php echo $vkeyhandle ?>'>
         <p>
-        keyhandle: <input type="text" name="regtype" ID="regtype" value='<?php echo $vkeyhandle ?>'>
+        keyhandle: <input type="text" name="regtype" ID="regtype" value='<?php echo $vregtype ?>'>
 
 
     </FORM>

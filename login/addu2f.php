@@ -37,7 +37,7 @@
             $keyhandle = str_replace("]","",$keyhandle);
             $keyhandle = str_replace(";","",$keyhandle);
 
-            if ($regtype != "reg") {
+            if ($regtype == "reg") {
               $result=pg_query("select count(userid)cnt from devices where userid='$user'");
               $row=pg_fetch_array($result);
 
@@ -45,6 +45,8 @@
 
               $q="insert into devices select '$user','$challenge','$keyhandle','$num_rows'";
               $sql=pg_query($q);
+
+	      //echo '<script type="text/javascript">location.replace("login2.php")</script>';
             }
 
             echo "<font size=4>userid=" . $user . ";\n";
@@ -56,7 +58,7 @@
             echo "<p>";
             echo "<font size=4>KeyHandle: " . $keyhandle . ";\n";
             echo '<script type="text/javascript">alert("Register Successful")</script>';
-            //echo '<script type="text/javascript">location.replace("login2.php")</script>';
+            echo '<script type="text/javascript">location.replace("login2.php")</script>';
           //}
 
           //else

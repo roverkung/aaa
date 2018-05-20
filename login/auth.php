@@ -22,15 +22,15 @@
               }
               else {                //2.SIGN UP
                  $result=pg_query("select * from  devices where userid='$use'");
-                 //$row=pg_fetch_array($result);
-                 if ($result) {
+                 $row2=pg_fetch_array($result);
+                 if ($row2) {
                     echo '<script type="text/javascript">alert("Sign up Successful,Please Insert Your U2F Key")</script>';
                     $regtype = "auth";
                     $actionwww = "doAuthenticate";
                  }
-                 else {
+                 /*else {
                    echo '<script type="text/javascript">alert("Please Register you U2F Key First!")</script>';
-                 }
+                 }*/
               }
 	    }
 	    else
@@ -50,6 +50,7 @@
    	        $q="insert into client (userid,passwd) values ('$use','$pas')";
 	        $sql=pg_query($q);
                 echo '<script type="text/javascript">alert("Register ID Successful! You Can Register your U2F KEY!")</script>';
+                //echo '<script type="text/javascript">location.replace("login2.php")</script>';
              } else {
                 echo '<script type="text/javascript">alert("無此帳號")</script>';
     	        echo '<script type="text/javascript">location.replace("login2.php")</script>';
@@ -71,7 +72,7 @@
        <INPUT TYPE="hidden" NAME="user" ID="user" value='<?php echo $use?>'>
        <INPUT TYPE="hidden" NAME="pass" ID="pass" value='<?php echo $pas?>'>
        <INPUT TYPE="hidden" NAME="keyhandle" ID="keyhandle" value='<?php echo $keyhandle?>'>
-       <INPUT TYPE="hidden" NAME="regtype" ID="regtype" value='<?php echo $regtype?>'>
+       <INPUT TYPE="hidden" NAME="regtype" ID="regtype" value="auth">
        <INPUT TYPE="hidden" name="doAuthenticate" id="doAuthenticate"/>
 
        <?php
