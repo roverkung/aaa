@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>註冊頁面</title>
+    <title>註冊頁面tt</title>
   </head>
     <FORM METHOD=POST ACTION="u2freg.php" onsubmit="javascript:return LoginDataChk('user','pass');">
         username: <input type="text" name="user" ID="user" value=""panel placeholder="輸入帳號">
