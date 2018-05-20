@@ -74,8 +74,9 @@
     <title>U2F Server Register Data</title>
   </head>
   <body>
-    <font size=12 color=red><?php echo $userid ?>U2F Server Register Data </font>
-
+    <P>
+    <font size=8 color=red><?php echo $userid ?>U2F Server Register Data </font>
+    <P>
     <form  method="POST" id="form" action="login2.php">
     <button name="homepage" type="submit" >HOME</button>
 

@@ -49,7 +49,7 @@
              if ($authtype=="1"){  //1.LOGIN            account as registered
    	        $q="insert into client (userid,passwd) values ('$use','$pas')";
 	        $sql=pg_query($q);
-                echo '<script type="text/javascript">alert("Register ID Successful! You Cas Register your U2F KEY!")</script>';
+                echo '<script type="text/javascript">alert("Register ID Successful! You Can Register your U2F KEY!")</script>';
              } else {
                 echo '<script type="text/javascript">alert("無此帳號")</script>';
     	        echo '<script type="text/javascript">location.replace("login2.php")</script>';
