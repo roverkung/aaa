@@ -22,7 +22,7 @@ if($_POST['user']!="")
 ?>
 <html>
 <head>
-    <title>PHP U2F Demo</title>
+    <title>Demo</title>
 
     <script src="u2f-api.js"></script>
     <script>
