@@ -3,6 +3,7 @@
   $pass = $_POST['pass'];
   $challenge = $_POST['challenge'];
   $keyhandle = $_POST['keyhandle'];
+  $keyhandle = trim($keyhandle);
   $regtype = $_POST['regtype'];
 
   require_once('U2F.php');

@@ -24,7 +24,7 @@
                  $result=pg_query("select * from  devices where userid='$use'");
                  $row2=pg_fetch_array($result);
                  if ($row2) {
-                    echo '<script type="text/javascript">alert("Sign up Successful,Please Insert Your U2F Key")</script>';
+                    echo '<script type="text/javascript">alert("Login Successful,Please Insert Your U2F Key")</script>';
                     $regtype = "auth";
                     $actionwww = "doAuthenticate";
                  }

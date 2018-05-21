@@ -79,8 +79,8 @@
 	            } else {
 	               $keyhand = $keyhand .','.$row["bind_data"];
 	            }
-	            $keyhand = '['.$keyhand.']';
 	         }
+                 $keyhand = '['.$keyhand.']';
 	      }
             }
             //echo "alert('444');\n";
@@ -266,4 +266,5 @@
 </form>
 </body>
 </html>
+
 
